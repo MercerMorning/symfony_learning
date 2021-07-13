@@ -18,6 +18,14 @@ class Comment
     private $id;
 
     /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
+    }
+    
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $author;

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Conference;
 use App\Repository\CommentRepository;
 use App\Repository\ConferenceRepository;
+use App\Service\MessageGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,6 +44,14 @@ class ConferenceController extends AbstractController
             $this->generateUrl('homepage', ['name' => 'sdf'])
 //            $request->attributes->get('_route')
         );
+    }
+
+    /**
+     * @Route("/inject", name="un")
+     */
+    public function inject(MessageGenerator $messageGenerator): Response
+    {
+        return Response::create('123');
     }
 
     /**
