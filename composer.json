@@ -21,14 +21,17 @@
         "symfony/framework-bundle": "5.2.*",
         "symfony/http-kernel": "5.2.*",
         "symfony/proxy-manager-bridge": "5.2.*",
-        "symfony/yaml": "5.2.*"
+        "symfony/twig-bundle": "^5.2",
+        "symfony/yaml": "5.2.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/intl-extra": "^3",
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "symfony/debug-bundle": "^5.2",
         "symfony/maker-bundle": "^1.33",
         "symfony/monolog-bundle": "^3.0",
         "symfony/stopwatch": "^5.2",
-        "symfony/twig-bundle": "^5.2",
         "symfony/var-dumper": "^5.2",
         "symfony/web-profiler-bundle": "^5.2"
     },

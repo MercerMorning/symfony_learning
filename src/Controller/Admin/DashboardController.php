@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Comment;
+use App\Entity\Conference;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -17,11 +19,11 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
 //        return Response::create('sdf');
-        return parent::index();
-//        $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
-//        $url = $routeBuilder->setController(CommentCrudController::class)->generateUrl();
-//
-//        return $this->redirect($url);
+//        return parent::index();
+        $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
+        $url = $routeBuilder->setController(CommentCrudController::class)->generateUrl();
+
+        return $this->redirect($url);
     }
 
     public function configureDashboard(): Dashboard

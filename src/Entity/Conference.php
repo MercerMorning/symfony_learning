@@ -35,10 +35,15 @@ class Conference
      */
     private $year;
 
-//    public function __toString(): string
-//    {
-//        return $this->city.' '.$this->year;
-//    }
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $createdAt;
+
+    public function __toString(): string
+    {
+        return $this->city.' '.$this->year;
+    }
 
     public function __construct()
     {
@@ -100,6 +105,18 @@ class Conference
     public function setYear(?int $year): self
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
