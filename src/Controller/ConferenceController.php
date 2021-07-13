@@ -28,4 +28,13 @@ class ConferenceController extends AbstractController
 EOF
         );
     }
+
+    public function config(Request $request): Response
+    {
+
+        return new Response(
+            $this->generateUrl('homepage', ['name' => 'sdf'])
+//            $request->attributes->get('_route')
+        );
+    }
 }

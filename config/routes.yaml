@@ -1,3 +1,23 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+# config/routes.yaml
+blog_list:
+  path:
+      en: /blog/{page?1<\d+>}.{_locale?}
+      nl: /blogo/{page?1<\d+>}.{_locale?}
+  stateless: true
+#  host: m.example.com
+  # значение контроллера ммеет формат 'controller_class::method_name'
+  controller: App\Controller\ConferenceController::config
+  schemes: [https]
+#  defaults:
+#    page: 1
+#  requirements:
+#    page: '\d+'
+  condition:  "context.getMethod() in ['GET', 'HEAD']"
+  requirements:
+    _locale: en|fr
+    _format: html|xml
+    _controller: App\Controller\ConferenceController
