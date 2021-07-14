@@ -1,9 +1,11 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
+{#{% block title %}Conference Guestbook - {{ conference }}{% endblock %}#}
 {% block title %}Conference Guestbook - {{ conference }}{% endblock %}
 
 {% block body %}
-    <h2>{{ conference }} Conference</h2>
+{#    <h2>{{ conference }} Conference</h2>#}
+    <h2>Conference</h2>
 
     {% if comments|length > 0 %}
         {% for comment in comments %}
@@ -19,13 +21,25 @@
             <p>{{ comment.text }}</p>
         {% endfor %}
         {% if previous >= 0 %}
-            <a href="{{ path('conference', { id: conference.id, offset: previous }) }}">Previous</a>
+            <a href="{{ path('conference', { conference: conference.id, offset: previous }) }}">Previous</a>
         {% endif %}
         {% if next < comments|length %}
-            <a href="{{ path('conference', { id: conference.id, offset: next }) }}">Next</a>
+            <a href="{{ path('conference', { conference: conference.id, offset: next }) }}">Next</a>
         {% endif %}
 
     {% else %}
         <div>No comments have been posted yet for this conference.</div>
     {% endif %}
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.author) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+{#    {{ form(comment_form) }}#}
 {% endblock %}

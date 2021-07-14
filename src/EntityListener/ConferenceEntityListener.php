@@ -16,6 +16,7 @@ class ConferenceEntityListener
 
     public function prePersist(Conference $conference, LifecycleEventArgs $event)
     {
+        $conference->setCreatedAt();
         $conference->computeSlug($this->slugger);
     }
 
