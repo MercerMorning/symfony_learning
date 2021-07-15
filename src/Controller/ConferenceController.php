@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Conference;
 use App\Form\CommentFormType;
+use App\Message\CommentMessage;
 use App\Repository\CommentRepository;
 use App\Repository\ConferenceRepository;
 use App\Service\MessageGenerator;
@@ -14,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
@@ -21,10 +23,12 @@ class ConferenceController extends AbstractController
 {
     public $twig;
     public $entityManager;
+    public $bus;
 
-    public function __construct(Environment $twig, EntityManagerInterface $entityManager)
+    public function __construct(Environment $twig, EntityManagerInterface $entityManager, MessageBusInterface $bus)
     {
         $this->twig = $twig;
+        $this->bus = $bus;
         $this->entityManager = $entityManager;
     }
 
@@ -112,10 +116,11 @@ class ConferenceController extends AbstractController
             ];
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
-            if (2 === $spamChecker->getSpamScore($comment, $context)) {
-                throw new \RuntimeException('Blatant spam, go away!');
-            }
-            return $this->redirectToRoute('conference', ['conference' => $conference->getId()]);
+            $this->bus->dispatch(new CommentMessage($comment->getId(), $context));
+//            if (2 === $spamChecker->getSpamScore($comment, $context)) {
+//                throw new \RuntimeException('Blatant spam, go away!');
+//            }
+//            return $this->redirectToRoute('conference', ['conference' => $conference->getId()]);
         }
 //        throw $this->createNotFoundException();
         $offset = max(0, $request->query->getInt('offset', 0));

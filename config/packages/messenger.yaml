@@ -1,0 +1,25 @@
+framework:
+  messenger:
+    transports:
+      async:
+            dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+            options:
+                  auto_setup: false
+                  use_notify: true
+                  check_delayed_interval: 60000
+      failure_transport: failed
+
+  transports:
+  # https://symfony.com/doc/current/messenger.html#transport-configuration
+       options:
+         use_notify: true
+         check_delayed_interval: 60000
+              # failed: 'doctrine://default?queue_name=failed'
+                retry_strategy:
+                max_retries: 3
+                multiplier: 2
+                failed: 'doctrine://default?queue_name=failed'
+      # or expanded to configure more options
+      #async:
+      #    dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+      #    options: []
