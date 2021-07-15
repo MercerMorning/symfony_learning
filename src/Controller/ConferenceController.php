@@ -115,7 +115,7 @@ class ConferenceController extends AbstractController
                 'permalink' => $request->getUri(),
             ];
             $this->entityManager->persist($comment);
-            $this->entityManager->flush();
+//            $this->entityManager->flush();
             $this->bus->dispatch(new CommentMessage($comment->getId(), $context));
 //            if (2 === $spamChecker->getSpamScore($comment, $context)) {
 //                throw new \RuntimeException('Blatant spam, go away!');
