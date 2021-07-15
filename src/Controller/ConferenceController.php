@@ -47,6 +47,7 @@ class ConferenceController extends AbstractController
      */
     public function index(Environment $twig, ConferenceRepository $conferenceRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         return new Response($twig->render('conference/index.html.twig', [
                        'conferences' => $conferenceRepository->findAll(),
                    ]));

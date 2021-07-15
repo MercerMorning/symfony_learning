@@ -21,7 +21,7 @@ class Admin implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $yes;
+    private $urername;
 
     /**
      * @ORM\Column(type="json")
@@ -34,29 +34,28 @@ class Admin implements UserInterface
      */
     private $password;
 
+    public function __toString(): string
+    {
+        return $this->urername;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getYes(): ?string
+    public function getUrername(): ?string
     {
-        return $this->yes;
+        return $this->urername;
     }
 
-    public function setYes(string $yes): self
+    public function setUrername(string $urername): self
     {
-        $this->yes = $yes;
+        $this->urername = $urername;
 
         return $this;
     }
 
-    public function __toString(): string
-    {
-        return $this->id;
-    }
-
-    
     /**
      * A visual identifier that represents this user.
      *
@@ -64,7 +63,7 @@ class Admin implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->yes;
+        return (string) $this->urername;
     }
 
     /**
